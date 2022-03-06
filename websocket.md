@@ -40,7 +40,7 @@ http 프로토콜 → http or https(보안 강화)
 
 웹소켓은 full-duplex(양방향통신)을 지원하며 따라서 요청과 응답을 구분하지 않는다. 
 
-![Untitled](%E1%84%8B%E1%85%B0%E1%86%B8%E1%84%89%E1%85%A9%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%90%2008b42/Untitled.png)
+![websocket_handshake](https://github.com/dhflxhdxhd/chat/blob/main/img/websocket_handshake.png?raw=true)
 
 붉은 박스 : Opening handshake
 
@@ -62,6 +62,6 @@ Closing handshake
 
 클라이언트와 서버 모드 커넥션을 종료하기 위한 컨트롤 프레임을 전송할 수 있다. 컨트롤 프레임은 closing handshake를 시작하라는 특저한 컨트롤 시퀀스를 포함한 데이터를 가지고 있다. 위 그림에서는 서버가 커넥션을 종료한다는 프레임을 보내고, 클라이언트가 이에 대한 응답으로 Close 프레임을 전송한다. 그러면 웹소켓 연결이 종료된다. 종료 이후에 수신되는 데이터는 모두 버려진다. 
 
-![Untitled](%E1%84%8B%E1%85%B0%E1%86%B8%E1%84%89%E1%85%A9%E1%84%8F%E1%85%A6%E1%86%BA%20%E1%84%90%2008b42/Untitled%201.png)
+![compareRealtime](https://github.com/dhflxhdxhd/chat/blob/main/img/compareRealtime.png?raw=true)
 
 Polling 방식(요청-응답방식)과 다르게 양방향으로 원할때 요청을 보낼 수 있으며 stateless한 HTTP에 비해 오버헤드가 적으므로 유용하게 사용할 수 있다.
