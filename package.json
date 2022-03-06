@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/dhflxhdxhd/chat/issues"
   },
-  "homepage": "https://github.com/dhflxhdxhd/chat#readme"
+  "homepage": "https://github.com/dhflxhdxhd/chat#readme",
+  "dependencies": {
+    "ws": "^8.5.0"
+  }
 }
