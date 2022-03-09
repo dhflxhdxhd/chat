@@ -24,7 +24,7 @@ const wss = new WebSocket.Server({
 
 // 클라이언트가 connection
 wss.on('connection',ws => {
-    
+
     if(ws.readyState === ws.OPEN){
         ws.send(`클라이언트 접속을 환영합니다. from wss`)
     }
@@ -44,3 +44,5 @@ wss.on('connection',ws => {
 
     ws.send('something')
 })
+
+
