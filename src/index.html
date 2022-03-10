@@ -1,61 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>websocket ws module test</h1>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>websocket ws module test</h1>
 
-    <div id="button">
-        <button id="btn_send">send</button>
-        <button id="btn_close">close</button>
-    </div>
+        <div id="button">
+            <button id="btn_send">send</button>
+            <button id="btn_close">close</button>
+        </div>
 
-    <!-- <script src="../client.js"></script> -->
-    <script>
-        // 3) websocket 클라이언트 객체 생성(연결)
-        const ws = new WebSocket('ws://localhost:5000')
+        <!-- <script src="../client.js"></script> -->
+        <script>
+            // 3) websocket 클라이언트 객체 생성(연결)
+            const ws = new WebSocket('ws://localhost:30001')
 
-        ws.on('open', () => {
-            // ws.send('hello server');
-            console.log("hello server")
-        });
+            ws.addEventListener('open', () => {
+                // ws.send('hello server');
+                console.log("hello server by client")
+            });
 
+            ws.addEventListener('message', data => {
+                console.log('Message from server by client', data)
+            })
 
-        ws.on('message', data =>{
-            console.log('Message from server',data)
-        })
+            ws.addEventListener('close', () => {
+                console.log('connection close by client')
+            })
 
-        ws.on('close',()=>{
-            console.log('connection close')
-        })
+            ws.addEventListener('error', event => {
+                console.log(`${event} by client`)
+            })
 
-        ws.on('error',event => {
-            console.log(event)
-        })
+            // 버튼 클릭 이벤트 처리 웹소켓 서버에게 메세지 보내기
+            let cnt = 1;
+            document
+                .getElementById("btn_send")
+                .addEventListener('click', () => {
+                    if (ws.readyState === ws.OPEN) {
+                        ws.send(`cnt : ${cnt}`)
+                        console.log(cnt)
+                        cnt++;
+                    } else {
+                        alert("연결된 websocket server가 없습니다.")
+                    }
+                })
 
-        // 버튼 클릭 이벤트 처리
-        // 웹소켓 서버에게 메세지 보내기
-        let cnt = 1;
-        document.getElementById("btn_send").addEventListener('click',()=>{
-        if(ws.readyState === ws.OPEN){
-        ws.send(`cnt : ${cnt}`)
-        cnt++;
-        }else{
-        alert("연결된 websocket server가 없습니다.")
-        }
-        })
-
-        document.getElementById("btn_close").addEventListener('click',()=>{
-        if(ws.readyState === ws.OPEN){
-        ws.close();
-        }else{
-        alert("연결된 websocket server가 없습니다.")
-        }
-        })
-    </script>
-</body>
+            document
+                .getElementById("btn_close")
+                .addEventListener('click', () => {
+                    if (ws.readyState === ws.OPEN) {
+                        ws.close();
+                    } else {
+                        alert("연결된 websocket server가 없습니다.")
+                    }
+                })
+        </script>
+    </body>
 </html>
